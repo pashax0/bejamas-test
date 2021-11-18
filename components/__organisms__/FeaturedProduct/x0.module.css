@@ -1,0 +1,56 @@
+.featuredProduct {
+    position: relative;
+}
+
+.header {
+    margin-bottom: 27px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.addButton {
+    padding: 13px;
+    border: none;
+    text-align: center;
+    color: var(--color-white);
+    background-color: var(--color-black);
+    cursor: pointer;
+}
+
+.banner {
+    position: relative;
+}
+
+.banner__flag {
+    position: absolute;
+    bottom: 0;
+    left: 0;
+}
+
+.flag {
+    width: 272px;
+    height: 67px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    background-color: var(--color-white);
+    color: var(--color-black);
+}
+
+.image {
+    display: block;
+    width: 100%;
+}
+
+.details {
+    display: flex;
+}
+
+.details__title {
+    font-size: 22px;
+}
+
+.description {
+    max-width: 690px;
+}
