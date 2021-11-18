@@ -3,8 +3,113 @@ import Head from 'next/head'
 import Image from 'next/image';
 
 import PageHeader from '../components/PageHeader';
-import ProductCard from '../components/__molecules__/ProductCard';
+import Storefront from '../components/__organisms__/Storefront';
 import styles from '../styles/Home.module.css';
+
+const products = [
+    {
+        "name": "Red Bench",
+        "category": "people",
+        "price": 3.89,
+        "currency": "USD",
+        "image": {
+            src: 'https://images.pexels.com/photos/57690/pexels-photo-57690.jpeg?auto=compress&cs=tinysrgb&dpr=2&h=750&w=1260',
+            alt: 'image',
+        },
+        "bestseller": true,
+        "featured": false,
+        "details": null
+    },
+    {
+        "name": "Egg Balloon",
+        "category": "food",
+        "price": 93.89,
+        "currency": "USD",
+        "image": {
+            src: 'https://images.pexels.com/photos/415188/pexels-photo-415188.jpeg?cs=srgb&dl=pexels-pixabay-415188.jpg&fm=jpg'
+        },
+        "bestseller": false,
+        "featured": false,
+        "details": null
+    },
+    {
+        "name": "Man",
+        "category": "people",
+        "price": 100,
+        "currency": "USD",
+        "image": {
+            "src": "",
+            "alt": ""
+        },
+        "bestseller": false,
+        "featured": false,
+        "details": null
+    },
+    {
+        "name": "Architecture",
+        "category": "landmarks",
+        "price": 101,
+        "currency": "USD",
+        "dimmentions": {
+            "width": 1020,
+            "height": 1020
+        },
+        "image": "",
+        "bestseller": false,
+        "featured": false,
+        "details": null
+    },
+    {
+        "name": "Samurai King Restling",
+        "category": "landmarks",
+        "price": 101,
+        "currency": "USD",
+        "image": {
+            "src": "",
+            "alt": ""
+        },
+        "bestseller": false,
+        "featured": true,
+        "details": {
+            "dimmentions": {
+                "width": 1020,
+                "height": 1020
+            },
+            "size": 15000,
+            "description": "So how did the classical Latin become so incoherent? According to McClintock, a 15th century typesetter likely",
+            "recommendations": [
+                {
+                    "src": "",
+                    "alt": ""
+                },
+                {
+                    "src": "",
+                    "alt": ""
+                },
+                {
+                    "src": "",
+                    "alt": ""
+                }
+            ]
+        }
+    }
+];
+
+const categories = [
+    'people',
+    'premium',
+    'pets',
+    'food',
+    'landmarks',
+    'cities',
+    'nature'
+];
+
+const prices = [
+    20,
+    100,
+    200
+]
 
 const Home: NextPage = () => {
   return (
@@ -15,22 +120,15 @@ const Home: NextPage = () => {
         <link rel="icon" href="/favicon.ico" />
       </Head>
       <PageHeader />
-      <main className={styles.main}>
-        <ProductCard
-            name="Red Bench"
-          category="people"
-          price={3.89}
-          currency="USD"
-          isBestseller
-          isFeatured={false}
-            image={{
-                src: 'https://images.pexels.com/photos/57690/pexels-photo-57690.jpeg?auto=compress&cs=tinysrgb&dpr=2&h=750&w=1260',
-                alt: 'image',
-            }}
+      <main>
+        <Storefront
+            categories={categories}
+            prices={prices}
+            products={products}
         />
       </main>
     </div>
   )
 }
 
-export default Home
+export default Home;

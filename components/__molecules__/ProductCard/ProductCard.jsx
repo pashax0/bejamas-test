@@ -10,7 +10,9 @@ const ProductCard = ({ className, category, name, price, currency, isBestseller,
                 <picture className={cssStyles.picture}>
                     <img className={classNames(cssStyles.image, cssStyles.picture__image)} alt={alt} src={src} />
                 </picture>
-                <div className={classNames(cssStyles.productCard__mark, cssStyles.mark)}>Best Seller</div>
+                {isBestseller && (
+                    <div className={classNames(cssStyles.productCard__mark, cssStyles.mark)}>Best Seller</div>
+                )}
                 <button type="button" className={classNames(cssStyles.productCard__button, cssStyles.addButton)}>
                     ADD TO CARD
                 </button>

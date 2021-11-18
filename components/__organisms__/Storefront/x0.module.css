@@ -1,0 +1,43 @@
+.storefront {
+    position: relative;
+}
+
+.storefront__header {
+    display: flex;
+    justify-content: space-between;
+}
+
+.storefront__main {
+    display: flex;
+}
+
+.storefront__filters {
+
+}
+
+.storefront__products {
+
+}
+
+.productFilter {
+    margin: 0;
+    padding: 0;
+}
+
+.productFilter__item {
+    list-style: none;
+}
+
+.productList {
+    margin: 0;
+    padding: 0;
+    display: flex;
+    justify-content: center;
+    flex-wrap: wrap;
+    gap: 50px;
+}
+
+.productList__item {
+    flex: 0 1 320px;
+    list-style: none;
+}
