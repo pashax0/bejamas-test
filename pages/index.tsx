@@ -3,6 +3,7 @@ import Head from 'next/head'
 import Image from 'next/image';
 
 import PageHeader from '../components/PageHeader';
+import ProductCard from '../components/__molecules__/ProductCard';
 import styles from '../styles/Home.module.css';
 
 const Home: NextPage = () => {
@@ -15,6 +16,18 @@ const Home: NextPage = () => {
       </Head>
       <PageHeader />
       <main className={styles.main}>
+        <ProductCard
+            name="Red Bench"
+          category="people"
+          price={3.89}
+          currency="USD"
+          isBestseller
+          isFeatured={false}
+            image={{
+                src: 'https://images.pexels.com/photos/57690/pexels-photo-57690.jpeg?auto=compress&cs=tinysrgb&dpr=2&h=750&w=1260',
+                alt: 'image',
+            }}
+        />
       </main>
     </div>
   )
