@@ -1,8 +1,12 @@
 :root {
   /* colors */
   --color-white: #fff;
+  --color-light-grey: #E4E4E4;
   --color-grey: #656565;
   --color-black: #000;
+
+  /* borders */
+  --border-block: 4px solid var(--color-light-grey);
 }
 
 html,

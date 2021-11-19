@@ -7,7 +7,7 @@ const PageHeader = () => {
     return (
         <header className={cssStyles.header}>
             <Logo />
-            <Basket />
+            <Basket products={[1]}/>
         </header>
     )
 }

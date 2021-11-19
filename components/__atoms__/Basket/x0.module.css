@@ -1,3 +1,24 @@
 .basket {
     position: relative;
 }
+
+.basket__badge {
+    position: absolute;
+    bottom: 0;
+    right: 0;
+    transform: translateY(100%);
+    width: 443px;
+    height: 279px;
+    padding: 22px 25px;
+    background-color: var(--color-white);
+    border: var(--border-block);
+}
+
+.basket__badge_hidden {
+    opacity: 0;
+}
+
+.basket__badge_showed {
+    z-index: 10;
+    opacity: 100;
+}
