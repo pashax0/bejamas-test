@@ -10,11 +10,13 @@ const fetcher = (url) => new Promise(function(resolve, reject) {
     setTimeout(() => resolve({products, url}), 3000);
 });
 
-const Storefront = ({ className, categories = [], prices = [], products, onToggleSorting, onChangeSortingType}) => {
+const Storefront = ({ className, categories = [], prices = [], sort, products, onToggleSorting, onChangeSortingType}) => {
     // const {products, error} = useSWR('/', fetcher);
     // console.log(products);
     // if (error) return <div>error</div>
     // if (!products) return <div>...</div>
+
+    const {by: sortBy} = sort;
 
     return (
         <div className={classNames(cssStyles.storefront, className)}>
@@ -26,7 +28,7 @@ const Storefront = ({ className, categories = [], prices = [], products, onToggl
                 </div>
                 <div>
                     <button type="button" onClick={onToggleSorting}>Sort By</button>
-                    <select onChange={(ev) => onChangeSortingType(ev.target.value)}>
+                    <select defaultValue={sortBy} onChange={(ev) => onChangeSortingType(ev.target.value)}>
                         <option value="price">price</option>
                         <option value="name">alphabet</option>
                     </select>

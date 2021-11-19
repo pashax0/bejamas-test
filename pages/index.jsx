@@ -224,11 +224,11 @@ const fetcher = (page, sort = {}) => new Promise(function(resolve, reject) {
     }, 500);
 });
 
-const Home = () => {
+const Home = ({featuredProduct}) => {
     const router = useRouter();
 
     const [products, updateProducts] = useState([]);
-    const [sort, updateSorting] = useState({by: 'price', direction: 'asc'});
+    const [sort, updateSorting] = useState({by: 'name', direction: 'asc'});
 
     useEffect(async () => {
         const data = await fetcher(1, sort);
@@ -262,10 +262,11 @@ const Home = () => {
       </Head>
       <PageHeader />
       <main>
-        {/*<FeaturedProduct {...dummyProducts[4]} />*/}
+        <FeaturedProduct {...featuredProduct} />
         <Storefront
             categories={categories}
             prices={prices}
+            sort={sort}
             products={products}
             onToggleSorting={changeSortingDirection}
             onChangeSortingType={changeSortingType}
@@ -273,6 +274,20 @@ const Home = () => {
       </main>
     </div>
   )
+}
+
+export async function getStaticProps(context) {
+    const featuredProduct = dummyProducts.find(product => product.featured);
+
+    if (!featuredProduct) {
+        return {
+            notFound: true,
+        }
+    }
+
+    return {
+        props: { featuredProduct },
+    }
 }
 
 export default Home;
