@@ -1,9 +1,28 @@
 import classNames from "classnames";
+import useSWR from 'swr';
 
 import cssStyles from './x0.module.css';
 import ProductCard from "../../__molecules__/ProductCard";
+import {products} from "../../../pages";
+import {useEffect, useState} from "react";
 
-const Storefront = ({ className, products, categories = [], prices = []}) => {
+const fetcher = (url) => new Promise(function(resolve, reject) {
+    setTimeout(() => resolve({products, url}), 3000);
+});
+
+const Storefront = ({ className, categories = [], prices = []}) => {
+    // const {products, error} = useSWR('/', fetcher);
+    // console.log(products);
+    // if (error) return <div>error</div>
+    // if (!products) return <div>...</div>
+
+    const [products, updateProducts] = useState([]);
+    useEffect(async () => {
+        const data = await fetcher('/');
+        console.log(data);
+        updateProducts(data.products);
+    }, [])
+
     return (
         <div className={classNames(cssStyles.storefront, className)}>
             <header className={classNames(cssStyles.storefront__header)}>
