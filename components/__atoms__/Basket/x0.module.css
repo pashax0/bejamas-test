@@ -2,6 +2,12 @@
     position: relative;
 }
 
+.basket__counter {
+    position: absolute;
+    bottom: 0;
+    right: 0;
+}
+
 .basket__badge {
     position: absolute;
     bottom: 0;

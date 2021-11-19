@@ -1,12 +1,17 @@
 import { useState } from "react";
+import {useDispatch, useSelector} from "react-redux";
 import classNames from "classnames";
 
 import {Basket as BasketIcon} from "../../__icons__/Basket";
+import {clearBasket} from "../../../redux/actions";
 
 import cssStyles from './x0.module.css';
 
-const Basket = ({products = []}) => {
+const Basket = () => {
+    const products = useSelector(state => state.basket)
     const isNotEmpty = products.length > 0;
+
+    const dispatch = useDispatch();
 
     const [isOpened, toggleBasket] = useState(false);
 
@@ -16,9 +21,17 @@ const Basket = ({products = []}) => {
                 <BasketIcon />
             </button>
             {isNotEmpty && (
-                <div className={classNames(cssStyles.basket__badge, isOpened ? cssStyles.basket__badge_showed : cssStyles.basket__badge_hidden, cssStyles.basketBadge)}>
-                    <button>CLEAR</button>
-                </div>
+                <>
+                    <div className={cssStyles.basket__counter}>
+                        {products.length}
+                    </div>
+                    <div className={classNames(cssStyles.basket__badge, isOpened ? cssStyles.basket__badge_showed : cssStyles.basket__badge_hidden, cssStyles.basketBadge)}>
+                        {products.map(product => (
+                            <div>{product}</div>
+                        ))}
+                        <button onClick={() => dispatch(clearBasket())}>CLEAR</button>
+                    </div>
+                </>
             )}
         </div>
     )
