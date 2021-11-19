@@ -1,4 +1,4 @@
-import type { NextPage } from 'next'
+// import type { NextPage } from 'next'
 import Head from 'next/head'
 import Image from 'next/image';
 
@@ -6,10 +6,12 @@ import PageHeader from '../components/PageHeader';
 import Storefront from '../components/__organisms__/Storefront';
 import FeaturedProduct from '../components/__organisms__/FeaturedProduct';
 import styles from '../styles/Home.module.css';
+import {useEffect, useState} from "react";
+import {useRouter} from "next/router";
 
-export const products = [
+export const dummyProducts = [
     {
-        "name": "Red Bench",
+        "name": "Hed Bench",
         "category": "people",
         "price": 3.89,
         "currency": "USD",
@@ -22,7 +24,7 @@ export const products = [
         "details": null
     },
     {
-        "name": "Egg Balloon",
+        "name": "Zgg Balloon",
         "category": "food",
         "price": 93.89,
         "currency": "USD",
@@ -34,7 +36,7 @@ export const products = [
         "details": null
     },
     {
-        "name": "Man",
+        "name": "Fan",
         "category": "people",
         "price": 100,
         "currency": "USD",
@@ -61,9 +63,9 @@ export const products = [
         "details": null
     },
     {
-        "name": "Samurai King Restling",
+        "name": "Famurai King Restling",
         "category": "landmarks",
-        "price": 101,
+        "price": 10,
         "currency": "USD",
         "image": {
             src: 'https://images.pexels.com/photos/326259/pexels-photo-326259.jpeg?auto=compress&cs=tinysrgb&dpr=2&h=750&w=1260',
@@ -99,7 +101,7 @@ export const products = [
     {
         "name": "Red Bench",
         "category": "people",
-        "price": 3.89,
+        "price": 3,
         "currency": "USD",
         "image": {
             src: 'https://images.pexels.com/photos/57690/pexels-photo-57690.jpeg?auto=compress&cs=tinysrgb&dpr=2&h=750&w=1260',
@@ -112,7 +114,7 @@ export const products = [
     {
         "name": "Egg Balloon",
         "category": "food",
-        "price": 93.89,
+        "price": 54,
         "currency": "USD",
         "image": {
             src: 'https://images.pexels.com/photos/415188/pexels-photo-415188.jpeg?cs=srgb&dl=pexels-pixabay-415188.jpg&fm=jpg'
@@ -124,7 +126,7 @@ export const products = [
     {
         "name": "Man",
         "category": "people",
-        "price": 100,
+        "price": 12,
         "currency": "USD",
         "image": {
             "src": "",
@@ -135,7 +137,7 @@ export const products = [
         "details": null
     },
     {
-        "name": "Architecture",
+        "name": "Brchitecture",
         "category": "landmarks",
         "price": 101,
         "currency": "USD",
@@ -151,7 +153,7 @@ export const products = [
     {
         "name": "Samurai King Restling",
         "category": "landmarks",
-        "price": 101,
+        "price": 11,
         "currency": "USD",
         "image": {
             src: 'https://images.pexels.com/photos/326259/pexels-photo-326259.jpeg?auto=compress&cs=tinysrgb&dpr=2&h=750&w=1260',
@@ -200,9 +202,57 @@ const prices = [
     20,
     100,
     200
-]
+];
 
-const Home: NextPage = () => {
+const fetcher = (page, sort = {}) => new Promise(function(resolve, reject) {
+    const {by: sortBy = 'name', direction: sortDirection = 'asc'} = sort;
+
+    const sortedProducts = dummyProducts.sort((a, b) => {
+        if (a[sortBy] > b[sortBy]) {
+            return sortDirection === 'asc' ? 1 : -1;
+        }
+        if (a[sortBy] < b[sortBy]) {
+            return sortDirection === 'asc' ? -1 : 1;
+        }
+        return 0;
+    })
+
+    const products = sortedProducts.slice((page * 6)  - 6, page * 6);
+
+    setTimeout(() => {
+        resolve({products, count: sortedProducts.length})
+    }, 500);
+});
+
+const Home = () => {
+    const router = useRouter();
+
+    const [products, updateProducts] = useState([]);
+    const [sort, updateSorting] = useState({by: 'price', direction: 'asc'});
+
+    useEffect(async () => {
+        const data = await fetcher(1, sort);
+        updateProducts(data.products);
+    }, [sort]);
+
+    const changeSortingDirection = () => {
+        updateSorting(prevSorting => ({
+            ...prevSorting,
+            direction: prevSorting.direction === 'asc' ? 'desc' : 'asc',
+        }));
+        // TODO: handle router correctly for different parameters
+        console.log(router);
+        router.push('?sort=asc', undefined, { shallow: true });
+    }
+
+    const changeSortingType = (type) => {
+        updateSorting(prevSorting => ({
+            ...prevSorting,
+            by: type,
+        }));
+        router.push(`?sortBy=${type}`, undefined, { shallow: true });
+    }
+
   return (
     <div className={styles.container}>
       <Head>
@@ -212,10 +262,13 @@ const Home: NextPage = () => {
       </Head>
       <PageHeader />
       <main>
-        <FeaturedProduct {...products[4]} />
+        {/*<FeaturedProduct {...dummyProducts[4]} />*/}
         <Storefront
             categories={categories}
             prices={prices}
+            products={products}
+            onToggleSorting={changeSortingDirection}
+            onChangeSortingType={changeSortingType}
         />
       </main>
     </div>

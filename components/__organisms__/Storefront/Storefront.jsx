@@ -10,18 +10,11 @@ const fetcher = (url) => new Promise(function(resolve, reject) {
     setTimeout(() => resolve({products, url}), 3000);
 });
 
-const Storefront = ({ className, categories = [], prices = []}) => {
+const Storefront = ({ className, categories = [], prices = [], products, onToggleSorting, onChangeSortingType}) => {
     // const {products, error} = useSWR('/', fetcher);
     // console.log(products);
     // if (error) return <div>error</div>
     // if (!products) return <div>...</div>
-
-    const [products, updateProducts] = useState([]);
-    useEffect(async () => {
-        const data = await fetcher('/');
-        console.log(data);
-        updateProducts(data.products);
-    }, [])
 
     return (
         <div className={classNames(cssStyles.storefront, className)}>
@@ -32,10 +25,10 @@ const Storefront = ({ className, categories = [], prices = []}) => {
                     <span>Premium Photos</span>
                 </div>
                 <div>
-                    <button>Sort By</button>
-                    <select>
+                    <button type="button" onClick={onToggleSorting}>Sort By</button>
+                    <select onChange={(ev) => onChangeSortingType(ev.target.value)}>
                         <option value="price">price</option>
-                        <option value="alphabet">alphabet</option>
+                        <option value="name">alphabet</option>
                     </select>
                 </div>
             </header>
@@ -62,15 +55,19 @@ const Storefront = ({ className, categories = [], prices = []}) => {
                         ))}
                     </ul>
                 </div>
-                <ul className={classNames(cssStyles.storefront__products, cssStyles.productList)}>
-                    {products.map(product => {
-                        return (
-                            <li className={classNames(cssStyles.productList__item)} key={product.name}>
-                                <ProductCard {...product} />
-                            </li>
-                        )
-                    })}
-                </ul>
+                {products.length > 0 ? (
+                    <ul className={classNames(cssStyles.storefront__products, cssStyles.productList)}>
+                        {products.map(product => {
+                            return (
+                                <li className={classNames(cssStyles.productList__item)} key={product.name}>
+                                    <ProductCard {...product} />
+                                </li>
+                            )
+                        })}
+                    </ul>
+                ) : (
+                    <div>loading</div>
+                )}
             </div>
         </div>
     )
