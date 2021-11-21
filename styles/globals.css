@@ -7,6 +7,7 @@
 
   /* borders */
   --border-block: 4px solid var(--color-light-grey);
+  --border-block_thin: 1px solid var(--color-light-grey);
 }
 
 html,

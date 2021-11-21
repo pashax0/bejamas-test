@@ -3,20 +3,31 @@
 }
 
 .storefront__header {
+    margin: 60px 0;
     display: flex;
     justify-content: space-between;
 }
 
 .storefront__main {
     display: flex;
+    flex-wrap: wrap;
+    gap: 50px;
 }
 
 .storefront__filters {
-
+    flex: 0 1 268px;
 }
 
 .storefront__products {
+    flex: 1 1 350px;
+}
 
+.filter {
+    border-bottom: var(--border-block_thin);
+}
+
+.filter:last-child {
+    border-bottom: none;
 }
 
 .productFilter {
@@ -28,16 +39,6 @@
     list-style: none;
 }
 
-.productList {
-    margin: 0;
-    padding: 0;
+.filterLabel {
     display: flex;
-    justify-content: center;
-    flex-wrap: wrap;
-    gap: 50px;
-}
-
-.productList__item {
-    flex: 0 1 320px;
-    list-style: none;
 }
