@@ -1,8 +1,8 @@
 // import type { NextPage } from 'next'
-import Head from 'next/head'
+import Head from 'next/head';
 import Image from 'next/image';
 
-import { dummyProducts } from "../data/seed";
+import { dummyProducts } from '../data/seed';
 
 import PageHeader from '../components/PageHeader';
 import Storefront from '../components/__organisms__/Storefront';
@@ -10,7 +10,7 @@ import FeaturedProduct from '../components/__organisms__/FeaturedProduct';
 
 import styles from '../styles/Home.module.css';
 
-const Home = ({featuredProduct}) => {
+const Home = function ({ featuredProduct }) {
   return (
     <div className={styles.container}>
       <Head>
@@ -24,21 +24,21 @@ const Home = ({featuredProduct}) => {
         <Storefront />
       </main>
     </div>
-  )
-}
+  );
+};
 
-export async function getStaticProps(context) {
-    const featuredProduct = dummyProducts.find(product => product.featured);
+export async function getStaticProps() {
+  const featuredProduct = dummyProducts.find((product) => product.featured);
 
-    if (!featuredProduct) {
-        return {
-            notFound: true,
-        }
-    }
-
+  if (!featuredProduct) {
     return {
-        props: { featuredProduct },
-    }
+      notFound: true,
+    };
+  }
+
+  return {
+    props: { featuredProduct },
+  };
 }
 
 export default Home;
