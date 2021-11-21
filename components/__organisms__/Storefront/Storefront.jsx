@@ -32,7 +32,7 @@ const fetcher = (page, sort = {}, filter = { categories: [] }) => new Promise((r
   }, 1000);
 });
 
-const Storefront = function ({
+function Storefront({
   className,
 }) {
   const router = useRouter();
@@ -209,6 +209,6 @@ const Storefront = function ({
       </div>
     </div>
   );
-};
+}
 
 export default Storefront;

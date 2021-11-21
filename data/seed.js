@@ -39,7 +39,7 @@ export const dummyProducts = [
   },
   {
     name: 'Architecture',
-    category: 'landmarks',
+    category: 'food',
     price: 101,
     currency: 'USD',
     dimmentions: {
@@ -127,7 +127,7 @@ export const dummyProducts = [
   },
   {
     name: 'Brchitecture',
-    category: 'landmarks',
+    category: 'nature',
     price: 101,
     currency: 'USD',
     dimmentions: {
@@ -215,7 +215,7 @@ export const dummyProducts = [
   },
   {
     name: 'Brchitecture',
-    category: 'landmarks',
+    category: 'cities',
     price: 500,
     currency: 'USD',
     dimmentions: {

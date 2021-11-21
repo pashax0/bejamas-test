@@ -21,6 +21,10 @@ module.exports = {
     sourceType: 'module',
   },
   rules: {
+    'react/function-component-definition': [2, {
+      namedComponents: 'function-declaration',
+      unnamedComponents: 'function-expression',
+    }],
     /* Off */
     'no-console': 'off',
     'import/prefer-default-export': 'off',

@@ -4,7 +4,7 @@ import ProductCard from '../ProductCard';
 
 import cssStyles from './x0.module.css';
 
-const Products = function ({ className, products }) {
+function Products({ className, products }) {
   return (
     <ul className={classNames(cssStyles.productList, className)}>
       {products.map((product) => (
@@ -14,6 +14,6 @@ const Products = function ({ className, products }) {
       ))}
     </ul>
   );
-};
+}
 
 export default Products;

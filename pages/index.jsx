@@ -10,7 +10,7 @@ import FeaturedProduct from '../components/__organisms__/FeaturedProduct';
 
 import styles from '../styles/Home.module.css';
 
-const Home = function ({ featuredProduct }) {
+function Home({ featuredProduct }) {
   return (
     <div className={styles.container}>
       <Head>
@@ -25,7 +25,7 @@ const Home = function ({ featuredProduct }) {
       </main>
     </div>
   );
-};
+}
 
 export async function getStaticProps() {
   const featuredProduct = dummyProducts.find((product) => product.featured);
