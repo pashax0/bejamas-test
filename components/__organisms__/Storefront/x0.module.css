@@ -42,3 +42,24 @@
 .filterLabel {
     display: flex;
 }
+
+.pagination {
+    position: relative;
+    display: flex;
+    justify-content: center;
+}
+
+.pagination__navigationButton {
+    visibility: hidden;
+}
+
+.pagination__navigationButton_visible {
+    visibility: visible;
+}
+
+.paginationList {
+    margin: 0;
+    padding: 0;
+    display: flex;
+    list-style: none;
+}

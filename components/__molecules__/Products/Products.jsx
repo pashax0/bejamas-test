@@ -1,21 +1,19 @@
-import classNames from "classnames";
+import classNames from 'classnames';
 
-import ProductCard from "../ProductCard";
+import ProductCard from '../ProductCard';
 
-import cssStyles from "./x0.module.css";
+import cssStyles from './x0.module.css';
 
-const Products = ({className, products}) => {
-    return (
-        <ul className={classNames(cssStyles.productList, className)}>
-            {products.map(product => {
-                return (
-                    <li className={classNames(cssStyles.productList__item)} key={product.name}>
-                        <ProductCard {...product} />
-                    </li>
-                )
-            })}
-        </ul>
-    )
-}
+const Products = function ({ className, products }) {
+  return (
+    <ul className={classNames(cssStyles.productList, className)}>
+      {products.map((product) => (
+        <li key={product} className={classNames(cssStyles.productList__item)}>
+          <ProductCard {...product} />
+        </li>
+      ))}
+    </ul>
+  );
+};
 
 export default Products;

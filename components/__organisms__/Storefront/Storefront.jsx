@@ -41,20 +41,23 @@ const Storefront = function ({
     categories: [],
   };
 
+  const [currentPage, updateCurrentPage] = useState(1);
   const [filter, updateFilter] = useState(initialFilter);
   const [products, updateProducts] = useState(null);
+  const [productsCount, updateProductsCount] = useState(null);
   const [sort, updateSorting] = useState({ by: 'name', direction: 'asc' });
 
   const { by: sortBy } = sort;
 
   useEffect(() => {
     async function fetchProducts() {
-      const data = await fetcher(1, sort, filter);
+      const data = await fetcher(currentPage, sort, filter);
       updateProducts(data.products);
+      updateProductsCount(data.count);
     }
 
     fetchProducts();
-  }, [sort, filter]);
+  }, [sort, filter, currentPage]);
 
   const sortingDirectionHandler = () => {
     updateSorting((prevSorting) => ({
@@ -73,6 +76,7 @@ const Storefront = function ({
       ...prevSorting,
       by: type,
     }));
+    updateCurrentPage(1);
 
     router.push(`?sortBy=${type}`, undefined, { shallow: true });
   };
@@ -93,6 +97,7 @@ const Storefront = function ({
 
       return { ...prevFilter, categories: updatedCategories };
     });
+    updateCurrentPage(1);
   };
 
   const renderProducts = (renderedProducts) => (
@@ -102,6 +107,51 @@ const Storefront = function ({
       <div>no products with the appropriate characteristics</div>
     )
   );
+
+  const renderPagination = (countOfProducts) => {
+    const countOfPages = Math.ceil(countOfProducts / 6);
+    const pages = Array.apply(null, Array(countOfPages)).map((x, i) => ++i);
+
+    const shouldRenderPreviousButton = currentPage > 1;
+    const shouldRenderNextButton = countOfPages > currentPage;
+
+    return (
+      <div className={cssStyles.pagination}>
+        <button
+          type="button"
+          className={classNames(
+            cssStyles.pagination__navigationButton,
+            shouldRenderPreviousButton && cssStyles.pagination__navigationButton_visible,
+          )}
+        >
+          {'<'}
+        </button>
+        <ul className={cssStyles.paginationList}>
+          {pages.map((page) => (
+            <li key={page}>
+              <button
+                value={page}
+                onClick={(event) => {
+                  updateCurrentPage(event.target.value);
+                }}
+              >
+                {page}
+              </button>
+            </li>
+          ))}
+        </ul>
+        <button
+          type="button"
+          className={classNames(
+            cssStyles.pagination__navigationButton,
+            shouldRenderNextButton && cssStyles.pagination__navigationButton_visible,
+          )}
+        >
+          {'>'}
+        </button>
+      </div>
+    );
+  };
 
   return (
     <div className={classNames(cssStyles.storefront, className)}>
@@ -151,6 +201,9 @@ const Storefront = function ({
             renderProducts(products)
           ) : (
             <div>loading...</div>
+          )}
+          {productsCount && (
+            renderPagination(productsCount)
           )}
         </div>
       </div>
