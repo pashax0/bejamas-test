@@ -10,13 +10,47 @@ const fetcher = (url) => new Promise(function(resolve, reject) {
     setTimeout(() => resolve({products, url}), 3000);
 });
 
-const Storefront = ({ className, categories = [], prices = [], sort, products, onToggleSorting, onChangeSortingType}) => {
+const Storefront = ({
+    className,
+    categories = [],
+    prices = [],
+    sort,
+    products,
+    onToggleSorting,
+    onChangeSortingType,
+    onProductFilterUpdate,
+}) => {
     // const {products, error} = useSWR('/', fetcher);
     // console.log(products);
     // if (error) return <div>error</div>
     // if (!products) return <div>...</div>
 
+    const initialFilter = {
+        categories: []
+    }
+
+    const [filter, updateFilter] = useState(initialFilter);
+
     const {by: sortBy} = sort;
+
+    const updateProductFilter = (event) => {
+        updateFilter(prevFilter => {
+            const updatedCategory = event.target.name;
+            const isUpdatedCategoryChecked = event.target.checked;
+            const { categories: prevCategories } = prevFilter;
+
+            let updatedCategories = [];
+
+            if (isUpdatedCategoryChecked) {
+                updatedCategories = [...prevCategories, updatedCategory]
+            } else {
+                updatedCategories = prevCategories.filter(category => category !== updatedCategory);
+            }
+
+            return {...prevFilter, categories: updatedCategories}
+        })
+        onProductFilterUpdate(filter);
+    }
 
     return (
         <div className={classNames(cssStyles.storefront, className)}>
@@ -40,7 +74,7 @@ const Storefront = ({ className, categories = [], prices = [], sort, products, o
                         {categories.map(category => (
                             <li key={category} className={cssStyles.productFilter__item}>
                                 <label>
-                                    <input type="checkbox"/>
+                                    <input type="checkbox" name={category} onChange={updateProductFilter}/>
                                     {category}
                                 </label>
                             </li>

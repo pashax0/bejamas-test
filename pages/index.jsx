@@ -204,10 +204,15 @@ const prices = [
     200
 ];
 
-const fetcher = (page, sort = {}) => new Promise(function(resolve, reject) {
+const fetcher = (page, sort = {}, filter = { categories: [] }) => new Promise(function(resolve, reject) {
     const {by: sortBy = 'name', direction: sortDirection = 'asc'} = sort;
+    const { categories } = filter;
 
-    const sortedProducts = dummyProducts.sort((a, b) => {
+    const filteredProducts = categories.length > 0 ?
+        dummyProducts.filter(product => categories.includes(product.category)) :
+        dummyProducts
+
+    const sortedProducts = filteredProducts.sort((a, b) => {
         if (a[sortBy] > b[sortBy]) {
             return sortDirection === 'asc' ? 1 : -1;
         }
@@ -229,11 +234,12 @@ const Home = ({featuredProduct}) => {
 
     const [products, updateProducts] = useState([]);
     const [sort, updateSorting] = useState({by: 'name', direction: 'asc'});
+    const [filter, updateFilter] = useState({categories: []});
 
     useEffect(async () => {
-        const data = await fetcher(1, sort);
+        const data = await fetcher(1, sort, filter);
         updateProducts(data.products);
-    }, [sort]);
+    }, [sort, filter]);
 
     const changeSortingDirection = () => {
         updateSorting(prevSorting => ({
@@ -253,6 +259,10 @@ const Home = ({featuredProduct}) => {
         router.push(`?sortBy=${type}`, undefined, { shallow: true });
     }
 
+    const filterProducts = (newFilter) => {
+        updateFilter(newFilter)
+    }
+
   return (
     <div className={styles.container}>
       <Head>
@@ -270,6 +280,7 @@ const Home = ({featuredProduct}) => {
             products={products}
             onToggleSorting={changeSortingDirection}
             onChangeSortingType={changeSortingType}
+            onProductFilterUpdate={filterProducts}
         />
       </main>
     </div>
