@@ -1,5 +1,8 @@
 .header {
+    min-height: 124px;
+    margin-bottom: 58px;
     display: flex;
     justify-content: space-between;
     align-items: center;
+    border-bottom: var(--border-block);
 }

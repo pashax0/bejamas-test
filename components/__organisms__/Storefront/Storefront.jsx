@@ -193,11 +193,11 @@ function Storefront({
   return (
     <div className={classNames(cssStyles.storefront, className)}>
       <header className={classNames(cssStyles.storefront__header)}>
-        <div>
+        <h2 className={cssStyles.header}>
           <span>Photography</span>
           <span> / </span>
-          <span>Premium Photos</span>
-        </div>
+          <span className={cssStyles.header__subcategory}>Premium Photos</span>
+        </h2>
         <div>
           <button type="button" onClick={sortingDirectionHandler}>Sort By</button>
           <select defaultValue={sortBy} onChange={sortingTypeHandler}>
@@ -207,8 +207,9 @@ function Storefront({
         </div>
       </header>
       <div className={classNames(cssStyles.storefront__main)}>
-        <div className={classNames(cssStyles.storefront__filters)}>
+        <div className={classNames(cssStyles.storefront__filters, cssStyles.filters)}>
           <div className={cssStyles.filter}>
+            <h3 className={cssStyles.filterHeader}>Category</h3>
             <ul className={cssStyles.productFilter}>
               {categories.map((category) => (
                 <li key={category} className={cssStyles.productFilter__item}>
@@ -221,6 +222,9 @@ function Storefront({
             </ul>
           </div>
           <div className={cssStyles.filter}>
+            <h3 className={cssStyles.filterHeader}>
+              Price range
+            </h3>
             <ul className={cssStyles.productFilter}>
               {prices.map((price) => (
                 <li key={price} className={cssStyles.productFilter__item}>

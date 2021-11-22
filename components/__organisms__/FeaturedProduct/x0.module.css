@@ -18,11 +18,12 @@
     cursor: pointer;
 }
 
-.banner {
+.bannerBlock {
     position: relative;
+    margin-bottom: 42px;
 }
 
-.banner__flag {
+.bannerBlock__flag {
     position: absolute;
     bottom: 0;
     left: 0;
@@ -30,12 +31,15 @@
 
 .flag {
     width: 272px;
-    height: 67px;
+    min-height: 67px;
     display: flex;
     justify-content: center;
     align-items: center;
     background-color: var(--color-white);
     color: var(--color-black);
+    font-size: 20px;
+    font-weight: 700;
+    line-height: 22px;
 }
 
 .image {
@@ -43,14 +47,19 @@
     width: 100%;
 }
 
-.details {
+.description {
     display: flex;
+    justify-content: space-between;
 }
 
-.details__title {
+.description__title {
     font-size: 22px;
 }
 
-.description {
+.about {
     max-width: 690px;
+}
+
+.details {
+    text-align: end;
 }
