@@ -63,6 +63,11 @@
 
 .filterLabel {
     display: flex;
+    align-items: center;
+}
+
+.filterCheckbox {
+    margin: 0 23px 0 0;
 }
 
 .pagination {

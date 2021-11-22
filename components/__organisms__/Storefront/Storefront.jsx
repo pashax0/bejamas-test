@@ -7,6 +7,7 @@ import { adoptPrices } from '../../../api/adapters/prices';
 import Products from '../../__molecules__/Products';
 
 import cssStyles from './x0.module.css';
+import Checkbox from '../../__atoms__/Checkbox';
 
 const fetcher = (page, sort = {}, filter = { categories: [], priceConditions: [] }) => new Promise((resolve, reject) => {
   const { by: sortBy = 'name', direction: sortDirection = 'asc' } = sort;
@@ -214,7 +215,7 @@ function Storefront({
               {categories.map((category) => (
                 <li key={category} className={cssStyles.productFilter__item}>
                   <label className={cssStyles.filterLabel}>
-                    <input type="checkbox" name={category} onChange={filterCategoryHandler} />
+                    <Checkbox className={cssStyles.filterCheckbox} name={category} onChange={filterCategoryHandler} />
                     {category}
                   </label>
                 </li>
@@ -229,7 +230,7 @@ function Storefront({
               {prices.map((price) => (
                 <li key={price} className={cssStyles.productFilter__item}>
                   <label className={cssStyles.filterLabel}>
-                    <input type="checkbox" name={price.condition} onChange={filterPriceHandler} />
+                    <Checkbox className={cssStyles.filterCheckbox} name={price.condition} onChange={filterPriceHandler} />
                     {price.description}
                   </label>
                 </li>
