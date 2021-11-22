@@ -20,3 +20,15 @@ export const adoptPrices = (breakpoints, currency = '$') => {
 
   return [...middleIntervals, lastInterval];
 };
+
+export const roundCurrency = (value) => (
+  value.toFixed(2)
+);
+
+export const currencySign = (currency) => {
+  switch (currency) {
+    case 'USD': return '$';
+    default: return '';
+  }
+}
+

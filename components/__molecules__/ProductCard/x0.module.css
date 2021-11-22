@@ -58,19 +58,39 @@
 }
 
 .description {
+    margin-top: 12px;
     display: flex;
     flex-direction: column;
 }
 
+.category,
+.name {
+    margin-bottom: 8px;
+    font-weight: 700;
+    text-transform: capitalize;
+}
+
 .category {
+    font-size: 22px;
+    font-weight: 700;
+    line-height: 24px;
+    color: var(--color-grey);
+}
+
+.price {
+    font-size: 29px;
+    line-height: 32px;
     color: var(--color-grey);
 }
 
 .name {
-
+    font-size: 34px;
+    line-height: 37px;
 }
 
 .mark {
+    padding: 7px 7px 7px 20px;
     font-size: 20px;
+    line-height: 22px;
     background-color: var(--color-white);
 }

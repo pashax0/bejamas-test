@@ -209,7 +209,7 @@ function Storefront({
           ) : (
             <div>loading...</div>
           )}
-          {(products.length > 0 && productsCount) && (
+          {(products?.length > 0 && productsCount) && (
             <Pagination countOfProducts={productsCount} currentPage={currentPage} onPageClick={updateCurrentPage} />
           )}
         </div>
