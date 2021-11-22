@@ -251,7 +251,7 @@ export const categories = [
   'nature',
 ];
 
-export const prices = [
+export const priceBreakpoints = [
   20,
   100,
   200,

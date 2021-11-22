@@ -2,18 +2,33 @@ import { useEffect, useState } from 'react';
 import { useRouter } from 'next/router';
 import classNames from 'classnames';
 
-import { dummyProducts, categories, prices } from '../../../data/seed';
+import { dummyProducts, categories, priceBreakpoints } from '../../../data/seed';
+import { adoptPrices } from '../../../api/adapters/prices';
 import Products from '../../__molecules__/Products';
 
 import cssStyles from './x0.module.css';
 
-const fetcher = (page, sort = {}, filter = { categories: [] }) => new Promise((resolve, reject) => {
+const fetcher = (page, sort = {}, filter = { categories: [], priceConditions: [] }) => new Promise((resolve, reject) => {
   const { by: sortBy = 'name', direction: sortDirection = 'asc' } = sort;
-  const { categories: filtredCategories } = filter;
+  const { categories: filteredCategories, priceConditions } = filter;
 
-  const filteredProducts = filtredCategories.length > 0
-    ? dummyProducts.filter((product) => filtredCategories.includes(product.category))
+  const filteredByCategoriesProducts = filteredCategories.length > 0
+    ? dummyProducts.filter((product) => filteredCategories.includes(product.category))
     : dummyProducts;
+
+  const filteredProducts = priceConditions.length > 0
+    ? filteredByCategoriesProducts.filter((product) => {
+      const { price } = product;
+      if (!price) {
+        return true;
+      }
+      return !!priceConditions.find((condition) => {
+        const x = price;
+        // TODO: remove EVAL
+        return eval(condition);
+      });
+    })
+    : filteredByCategoriesProducts;
 
   const sortedProducts = filteredProducts.sort((a, b) => {
     if (a[sortBy] > b[sortBy]) {
@@ -39,7 +54,10 @@ function Storefront({
 
   const initialFilter = {
     categories: [],
+    priceConditions: [],
   };
+
+  const prices = adoptPrices(priceBreakpoints);
 
   const [currentPage, updateCurrentPage] = useState(1);
   const [filter, updateFilter] = useState(initialFilter);
@@ -96,6 +114,25 @@ function Storefront({
       }
 
       return { ...prevFilter, categories: updatedCategories };
+    });
+    updateCurrentPage(1);
+  };
+
+  const filterPriceHandler = (event) => {
+    updateFilter((prevFilter) => {
+      const updatedPrice = event.target.name;
+      const isUpdatedPriceChecked = event.target.checked;
+      const { priceConditions: prevPriceConditions } = prevFilter;
+
+      let updatedPrices = [];
+
+      if (isUpdatedPriceChecked) {
+        updatedPrices = [...prevPriceConditions, updatedPrice];
+      } else {
+        updatedPrices = prevPriceConditions.filter((condition) => condition !== updatedPrice);
+      }
+
+      return { ...prevFilter, priceConditions: updatedPrices };
     });
     updateCurrentPage(1);
   };
@@ -188,8 +225,8 @@ function Storefront({
               {prices.map((price) => (
                 <li key={price} className={cssStyles.productFilter__item}>
                   <label className={cssStyles.filterLabel}>
-                    <input type="checkbox" />
-                    {price}
+                    <input type="checkbox" name={price.condition} onChange={filterPriceHandler} />
+                    {price.description}
                   </label>
                 </li>
               ))}
