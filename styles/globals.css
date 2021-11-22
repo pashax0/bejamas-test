@@ -36,9 +36,14 @@ h2 {
   line-height: 33px;
 }
 
-h3 {
+h3, h4 {
   font-size: 22px;
   line-height: 24px;
+}
+
+p {
+  font-size: 18px;
+  line-height: 27px;
 }
 
 a {

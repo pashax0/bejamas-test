@@ -73,15 +73,15 @@ export const dummyProducts = [
                 + 'text to mockup various fonts for a type specimen book.So how did the classical Latin become so incoherent? According to McClintock.',
       recommendations: [
         {
-          src: '',
+          src: 'https://images.pexels.com/photos/733856/pexels-photo-733856.jpeg?auto=compress&cs=tinysrgb&dpr=2&h=750&w=1260',
           alt: '',
         },
         {
-          src: '',
+          src: 'https://images.pexels.com/photos/545032/pexels-photo-545032.jpeg?auto=compress&cs=tinysrgb&dpr=2&h=750&w=1260',
           alt: '',
         },
         {
-          src: '',
+          src: 'https://images.pexels.com/photos/1005456/pexels-photo-1005456.jpeg?auto=compress&cs=tinysrgb&dpr=2&h=750&w=1260',
           alt: '',
         },
       ],
