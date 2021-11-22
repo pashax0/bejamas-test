@@ -5,10 +5,12 @@ import classNames from 'classnames';
 import { dummyProducts, categories, priceBreakpoints } from '../../../data/seed';
 import { adoptPrices } from '../../../api/adapters/prices';
 import Products from '../../__molecules__/Products';
+import Checkbox from '../../__atoms__/Checkbox';
+import Pagination from '../../__atoms__/Pagination';
+import { BotttomArrowIcon } from './BotttomArrowIcon';
+import { TopArrowIcon } from './TopArrowIcon';
 
 import cssStyles from './x0.module.css';
-import Checkbox from '../../__atoms__/Checkbox';
-import Pagination from "../../__atoms__/Pagination/Pagination";
 
 const fetcher = (page, sort = {}, filter = { categories: [], priceConditions: [] }) => new Promise((resolve, reject) => {
   const { by: sortBy = 'name', direction: sortDirection = 'asc' } = sort;
@@ -67,7 +69,7 @@ function Storefront({
   const [productsCount, updateProductsCount] = useState(null);
   const [sort, updateSorting] = useState({ by: 'name', direction: 'asc' });
 
-  const { by: sortBy } = sort;
+  const { by: sortBy, direction: sortingDirection } = sort;
 
   useEffect(() => {
     async function fetchProducts() {
@@ -156,8 +158,15 @@ function Storefront({
           <span className={cssStyles.header__subcategory}>Premium Photos</span>
         </h2>
         <div>
-          <button type="button" onClick={sortingDirectionHandler}>Sort By</button>
-          <select defaultValue={sortBy} onChange={sortingTypeHandler}>
+          <button
+            type="button"
+            className={cssStyles.sortDirectionButton}
+            onClick={sortingDirectionHandler}
+          >
+            {sortingDirection === 'asc' ? <BotttomArrowIcon /> : <TopArrowIcon />}
+            <span className={cssStyles.sortDirectionButton__text}>Sort By</span>
+          </button>
+          <select className={cssStyles.sortTypeSelect} defaultValue={sortBy} onChange={sortingTypeHandler}>
             <option value="price">price</option>
             <option value="name">alphabet</option>
           </select>
@@ -194,13 +203,13 @@ function Storefront({
             </ul>
           </div>
         </div>
-        <div className={cssStyles.storefront__products}>
+        <div className={classNames(cssStyles.storefront__products, cssStyles.products)}>
           {products ? (
             renderProducts(products)
           ) : (
             <div>loading...</div>
           )}
-          {productsCount && (
+          {(products.length > 0 && productsCount) && (
             <Pagination countOfProducts={productsCount} currentPage={currentPage} onPageClick={updateCurrentPage} />
           )}
         </div>

@@ -84,7 +84,7 @@
 .details {
     display: flex;
     flex-direction: column;
-    gap: 54px;
+    gap: 36px;
     text-align: end;
 }
 
@@ -97,7 +97,7 @@
 }
 
 .recommendations {
-    margin: 0;
+    margin: 18px 0;
     padding: 0;
     display: flex;
     justify-content: flex-end;
