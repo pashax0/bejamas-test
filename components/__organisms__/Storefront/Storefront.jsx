@@ -183,8 +183,9 @@ function Storefront({
           <div className={cssStyles.filter}>
             <h3 className={cssStyles.filterHeader}>Category</h3>
             <ul className={cssStyles.productFilter}>
-              {categories.map((category) => (
-                <li key={category} className={cssStyles.productFilter__item}>
+              {categories.map((category, i) => (
+                  // eslint-disable-next-line react/no-array-index-key
+                <li key={i} className={cssStyles.productFilter__item}>
                   {/* eslint-disable-next-line jsx-a11y/label-has-associated-control */}
                   <label className={cssStyles.filterLabel}>
                     <Checkbox className={cssStyles.filterCheckbox} name={category} onChange={filterCategoryHandler} />
@@ -199,8 +200,9 @@ function Storefront({
               Price range
             </h3>
             <ul className={cssStyles.productFilter}>
-              {prices.map((price) => (
-                <li key={price} className={cssStyles.productFilter__item}>
+              {prices.map((price, i) => (
+                  // eslint-disable-next-line react/no-array-index-key
+                <li key={i} className={cssStyles.productFilter__item}>
                   {/* eslint-disable-next-line jsx-a11y/label-has-associated-control */}
                   <label className={cssStyles.filterLabel}>
                     <Checkbox

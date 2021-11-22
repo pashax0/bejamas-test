@@ -8,7 +8,7 @@ function Products({ className, products }) {
   return (
     <ul className={classNames(cssStyles.productList, className)}>
       {products.map((product) => (
-        <li key={product} className={classNames(cssStyles.productList__item)}>
+        <li key={product.id} className={classNames(cssStyles.productList__item)}>
           <ProductCard product={product} />
         </li>
       ))}
