@@ -8,6 +8,7 @@ import Products from '../../__molecules__/Products';
 
 import cssStyles from './x0.module.css';
 import Checkbox from '../../__atoms__/Checkbox';
+import Pagination from "../../__atoms__/Pagination/Pagination";
 
 const fetcher = (page, sort = {}, filter = { categories: [], priceConditions: [] }) => new Promise((resolve, reject) => {
   const { by: sortBy = 'name', direction: sortDirection = 'asc' } = sort;
@@ -146,51 +147,6 @@ function Storefront({
     )
   );
 
-  const renderPagination = (countOfProducts) => {
-    const countOfPages = Math.ceil(countOfProducts / 6);
-    const pages = Array.apply(null, Array(countOfPages)).map((x, i) => ++i);
-
-    const shouldRenderPreviousButton = currentPage > 1;
-    const shouldRenderNextButton = countOfPages > currentPage;
-
-    return (
-      <div className={cssStyles.pagination}>
-        <button
-          type="button"
-          className={classNames(
-            cssStyles.pagination__navigationButton,
-            shouldRenderPreviousButton && cssStyles.pagination__navigationButton_visible,
-          )}
-        >
-          {'<'}
-        </button>
-        <ul className={cssStyles.paginationList}>
-          {pages.map((page) => (
-            <li key={page}>
-              <button
-                value={page}
-                onClick={(event) => {
-                  updateCurrentPage(event.target.value);
-                }}
-              >
-                {page}
-              </button>
-            </li>
-          ))}
-        </ul>
-        <button
-          type="button"
-          className={classNames(
-            cssStyles.pagination__navigationButton,
-            shouldRenderNextButton && cssStyles.pagination__navigationButton_visible,
-          )}
-        >
-          {'>'}
-        </button>
-      </div>
-    );
-  };
-
   return (
     <div className={classNames(cssStyles.storefront, className)}>
       <header className={classNames(cssStyles.storefront__header)}>
@@ -245,7 +201,7 @@ function Storefront({
             <div>loading...</div>
           )}
           {productsCount && (
-            renderPagination(productsCount)
+            <Pagination countOfProducts={productsCount} currentPage={currentPage} onPageClick={updateCurrentPage} />
           )}
         </div>
       </div>

@@ -1,0 +1,42 @@
+.pagination {
+    position: relative;
+    margin: 61px 0;
+    display: flex;
+    justify-content: center;
+    gap: 21px
+}
+
+.navigationButton {
+    margin: 0;
+    padding: 0;
+    border: none;
+    background: none;
+    font-size: inherit;
+    cursor: pointer;
+}
+
+.navigationButton_active {
+    font-weight: 700;
+}
+
+.navigationButton svg {
+    display: block;
+}
+
+.navigationButton_hidden {
+    visibility: hidden;
+}
+
+.navigationButton_visible {
+    visibility: visible;
+}
+
+.paginationList {
+    margin: 0;
+    padding: 0;
+    display: flex;
+    gap: 15px;
+    list-style: none;
+    font-size: 29px;
+    line-height: 32px;
+}
