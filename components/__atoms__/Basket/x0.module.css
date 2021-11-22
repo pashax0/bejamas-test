@@ -2,29 +2,89 @@
     position: relative;
 }
 
+.openButton {
+    margin: 0;
+    padding: 0;
+    border: none;
+    background: none;
+    cursor: pointer;
+}
+
 .basket__counter {
     position: absolute;
-    bottom: 0;
-    right: 0;
+    bottom: -12px;
+    right: -12px;
 }
 
 .basket__badge {
     position: absolute;
-    bottom: 0;
-    right: 0;
+    bottom: -32px;
+    right: -9px;
     transform: translateY(100%);
     width: 443px;
-    height: 279px;
     padding: 22px 25px;
     background-color: var(--color-white);
     border: var(--border-block);
+    transition: opacity .5s, z-index .5s .1s;
 }
 
 .basket__badge_hidden {
     opacity: 0;
+    z-index: -1;
 }
 
 .basket__badge_showed {
     z-index: 10;
     opacity: 100;
+}
+
+.counter {
+    padding: 0 4px;
+    background: var(--color-black);
+    color: var(--color-white);
+    font-size: 20px;
+    font-weight: 700;
+    line-height: 22px;
+}
+
+.basketBadge {
+    display: flex;
+    flex-direction: column;
+}
+
+.basketBadge__closeButton {
+    align-self: flex-end;
+}
+
+.basketBadge__products {
+    flex-grow: 1;
+}
+
+.closeButton {
+    display: block;
+    margin: 0;
+    padding: 0;
+    border: none;
+    background: none;
+    cursor: pointer;
+}
+
+.closeButton svg {
+    display: block;
+}
+
+.productsList {
+    margin: 25px 0;
+    padding: 0 0 24px;
+    list-style: none;
+    border-bottom: var(--border-block_thin);
+}
+
+.clearButton {
+    padding: 15px 52px;
+    border: 3px solid var(--color-black);
+    font-size: 23px;
+    line-height: 25px;
+    background: none;
+    cursor: pointer;
 }

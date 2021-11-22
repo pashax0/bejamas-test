@@ -1,5 +1,5 @@
-import Logo from '../__atoms__/Logo';
-import Basket from '../__atoms__/Basket';
+import Logo from '../../__atoms__/Logo';
+import Basket from '../../__atoms__/Basket';
 
 import cssStyles from './x0.module.css';
 

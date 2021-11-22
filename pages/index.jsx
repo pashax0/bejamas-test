@@ -4,7 +4,7 @@ import Image from 'next/image';
 
 import { dummyProducts } from '../data/seed';
 
-import PageHeader from '../components/PageHeader';
+import PageHeader from '../components/__organisms__/PageHeader';
 import Storefront from '../components/__organisms__/Storefront';
 import FeaturedProduct from '../components/__organisms__/FeaturedProduct';
 
