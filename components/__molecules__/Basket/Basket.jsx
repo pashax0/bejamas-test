@@ -19,6 +19,7 @@ function Basket() {
     <div className={cssStyles.basket}>
       <button
         type="button"
+        aria-label="basket"
         className={cssStyles.openButton}
         onClick={() => dispatch(isOpened ? closeBasket() : openBasket())}
       >

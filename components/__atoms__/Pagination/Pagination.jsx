@@ -19,6 +19,7 @@ export default function Pagination({
     <div className={classNames(cssStyles.pagination, className)}>
       <button
         type="button"
+        aria-label="previous page"
         className={classNames(
           cssStyles.navigationButton,
           shouldRenderPreviousButton ? cssStyles.navigationButton_visible : cssStyles.navigationButton_hidden,
@@ -48,6 +49,7 @@ export default function Pagination({
       </ul>
       <button
         type="button"
+        aria-label="next page"
         className={classNames(
           cssStyles.navigationButton,
           shouldRenderNextButton ? cssStyles.navigationButton_visible : cssStyles.navigationButton_hidden,

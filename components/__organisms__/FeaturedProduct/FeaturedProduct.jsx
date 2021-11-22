@@ -7,10 +7,14 @@ import { addToBasket } from '../../../redux/actions';
 function FeaturedProduct({
   className, product,
 }) {
+  const DEFAULT_IMAGE_WIDTH = 1290;
+  const DEFAULT_IMAGE_HEIGHT = 852;
+
   const {
     category, name, details = {}, image = {},
   } = product;
   const { src, alt } = image;
+
   const dispatch = useDispatch();
 
   const {
@@ -32,7 +36,13 @@ function FeaturedProduct({
         </button>
         <div className={classNames(cssStyles.bannerBlock)}>
           <picture>
-            <img className={classNames(cssStyles.image)} alt={alt} src={src} />
+            <img
+              className={classNames(cssStyles.image)}
+              alt={alt}
+              src={src}
+              width={DEFAULT_IMAGE_WIDTH}
+              height={DEFAULT_IMAGE_HEIGHT}
+            />
           </picture>
           <div className={classNames(cssStyles.bannerBlock__flag, cssStyles.flag)}>
             Photo of the day

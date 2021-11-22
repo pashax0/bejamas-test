@@ -7,6 +7,9 @@ import { roundCurrency, currencySign } from '../../../api/adapters/prices';
 import cssStyles from './x0.module.css';
 
 function ProductCard({ className, product }) {
+  const DEFAULT_IMAGE_WIDTH = 282;
+  const DEFAULT_IMAGE_HEIGHT = 423;
+
   const {
     category, name, price, currency, bestseller, image = {},
   } = product;
@@ -18,7 +21,13 @@ function ProductCard({ className, product }) {
     <div className={classNames(cssStyles.productCard, className)}>
       <div className={cssStyles.main}>
         <picture className={cssStyles.picture}>
-          <img className={classNames(cssStyles.image, cssStyles.picture__image)} alt={alt} src={src} />
+          <img
+            className={classNames(cssStyles.image, cssStyles.picture__image)}
+            alt={alt}
+            src={src}
+            width={DEFAULT_IMAGE_WIDTH}
+            height={DEFAULT_IMAGE_HEIGHT}
+          />
         </picture>
         {bestseller && (
         <div className={classNames(cssStyles.productCard__mark, cssStyles.mark)}>Best Seller</div>
