@@ -6,6 +6,7 @@ import { clearBasket, closeBasket, openBasket } from '../../../redux/actions';
 
 import cssStyles from './x0.module.css';
 import { Cross } from '../../__icons__/Cross';
+import BasketProduct from './BasketProduct';
 
 function Basket() {
   const isOpened = useSelector((state) => state.basket.isOpened);
@@ -50,7 +51,9 @@ function Basket() {
             )}
             >
               {products.map((product) => (
-                <li className={product}>{product}</li>
+                <li key={product.id}>
+                  <BasketProduct product={product} />
+                </li>
               ))}
             </ul>
             <button

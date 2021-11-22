@@ -26,7 +26,7 @@ function Home({ featuredProduct }) {
       <div className={cssStyles.page__content}>
         <PageHeader />
         <main>
-          <FeaturedProduct {...featuredProduct} />
+          <FeaturedProduct product={featuredProduct} />
           <Storefront />
         </main>
       </div>

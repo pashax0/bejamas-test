@@ -6,9 +6,10 @@ import { roundCurrency, currencySign } from '../../../api/adapters/prices';
 
 import cssStyles from './x0.module.css';
 
-function ProductCard({
-  className, category, name, price, currency, bestseller, image = {},
-}) {
+function ProductCard({ className, product }) {
+  const {
+    category, name, price, currency, bestseller, image = {},
+  } = product;
   const { src, alt } = image;
 
   const dispatch = useDispatch();
@@ -25,7 +26,7 @@ function ProductCard({
         <button
           type="button"
           className={classNames(cssStyles.productCard__button, cssStyles.addButton)}
-          onClick={() => dispatch(addToBasket(name))}
+          onClick={() => dispatch(addToBasket(product))}
         >
           ADD TO CARD
         </button>

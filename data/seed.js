@@ -1,5 +1,6 @@
 export const dummyProducts = [
   {
+    id: '1',
     name: 'Hed Bench',
     category: 'people',
     price: 3.89,
@@ -13,6 +14,7 @@ export const dummyProducts = [
     details: null,
   },
   {
+    id: '2',
     name: 'Zgg Balloon',
     category: 'food',
     price: 93.89,
@@ -25,6 +27,7 @@ export const dummyProducts = [
     details: null,
   },
   {
+    id: '3',
     name: 'Fan',
     category: 'people',
     price: 100,
@@ -38,6 +41,7 @@ export const dummyProducts = [
     details: null,
   },
   {
+    id: '4',
     name: 'Architecture',
     category: 'food',
     price: 101,
@@ -52,6 +56,7 @@ export const dummyProducts = [
     details: null,
   },
   {
+    id: '5',
     name: 'Famurai King Restling',
     category: 'landmarks',
     price: 10,
@@ -88,6 +93,7 @@ export const dummyProducts = [
     },
   },
   {
+    id: '6',
     name: 'Red Bench',
     category: 'people',
     price: 3,
@@ -101,6 +107,7 @@ export const dummyProducts = [
     details: null,
   },
   {
+    id: '7',
     name: 'Egg Balloon',
     category: 'food',
     price: 54,
@@ -113,6 +120,7 @@ export const dummyProducts = [
     details: null,
   },
   {
+    id: '8',
     name: 'Man',
     category: 'people',
     price: 12,
@@ -126,6 +134,7 @@ export const dummyProducts = [
     details: null,
   },
   {
+    id: '9',
     name: 'Brchitecture',
     category: 'nature',
     price: 101,
@@ -140,6 +149,7 @@ export const dummyProducts = [
     details: null,
   },
   {
+    id: '10',
     name: 'Samurai King Restling',
     category: 'landmarks',
     price: 11,
@@ -176,6 +186,7 @@ export const dummyProducts = [
     },
   },
   {
+    id: '11',
     name: 'Red Bench',
     category: 'people',
     price: 30,
@@ -189,6 +200,7 @@ export const dummyProducts = [
     details: null,
   },
   {
+    id: '12',
     name: 'Egg Balloon',
     category: 'food',
     price: 54,
@@ -201,6 +213,7 @@ export const dummyProducts = [
     details: null,
   },
   {
+    id: '13',
     name: 'Man',
     category: 'people',
     price: 12,
@@ -214,6 +227,7 @@ export const dummyProducts = [
     details: null,
   },
   {
+    id: '14',
     name: 'Brchitecture',
     category: 'cities',
     price: 500,
@@ -228,6 +242,7 @@ export const dummyProducts = [
     details: null,
   },
   {
+    id: '15',
     name: 'Samurai King Restling',
     category: 'landmarks',
     price: 17,

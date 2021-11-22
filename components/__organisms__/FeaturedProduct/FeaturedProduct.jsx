@@ -5,12 +5,17 @@ import cssStyles from './x0.module.css';
 import { addToBasket } from '../../../redux/actions';
 
 function FeaturedProduct({
-  className, category, name, details = {}, image = {},
+  className, product,
 }) {
+  const {
+    category, name, details = {}, image = {},
+  } = product;
   const { src, alt } = image;
   const dispatch = useDispatch();
 
-  const { description, dimensions, size, recommendations } = details;
+  const {
+    description, dimensions, size, recommendations,
+  } = details;
 
   return (
     <div className={classNames(cssStyles.featuredProduct, className)}>
@@ -21,7 +26,7 @@ function FeaturedProduct({
         <button
           type="button"
           className={classNames(cssStyles.main__addButton, cssStyles.addButton)}
-          onClick={() => dispatch(addToBasket(name))}
+          onClick={() => dispatch(addToBasket(product))}
         >
           ADD TO CARD
         </button>
