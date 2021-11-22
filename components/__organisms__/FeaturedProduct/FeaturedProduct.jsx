@@ -52,10 +52,15 @@ function FeaturedProduct({
           <div>
             <h3 className={cssStyles.description__title}>People also buy</h3>
             <ul className={cssStyles.recommendations}>
-              {recommendations.map((image) => (
+              {recommendations.map((recommendedImage) => (
                 <li className={cssStyles.recommendations__item}>
+                  {/* eslint-disable-next-line @next/next/no-html-link-for-pages */}
                   <a href="/">
-                    <img className={cssStyles.recommendations__image} src={image.src} alt={image.alt} />
+                    <img
+                      className={cssStyles.recommendations__image}
+                      src={recommendedImage.src}
+                      alt={recommendedImage.alt}
+                    />
                   </a>
                 </li>
               ))}

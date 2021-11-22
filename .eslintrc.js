@@ -31,9 +31,11 @@ module.exports = {
     'react/react-in-jsx-scope': 'off',
     'react/no-danger': 'off',
     'react/jsx-props-no-spreading': 'off',
+    'no-restricted-exports': 'off',
 
     /* Warn */
     '@next/next/no-img-element': 'warn',
+    'react/prop-types': 'warn',
 
     /* Error */
     'max-len': [

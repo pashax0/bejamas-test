@@ -1,10 +1,12 @@
 import cssStyles from './x0.module.css';
-import {BejamasLogo} from "../../__icons__/BejamasLogo";
+import { BejamasLogo } from '../../__icons__/BejamasLogo';
 
-const Logo = () => (
+function Logo() {
+  return (
     <div className={cssStyles.logo}>
-        <BejamasLogo />
+      <BejamasLogo />
     </div>
-)
+  );
+}
 
 export default Logo;

@@ -12,7 +12,11 @@ import { TopArrowIcon } from './TopArrowIcon';
 
 import cssStyles from './x0.module.css';
 
-const fetcher = (page, sort = {}, filter = { categories: [], priceConditions: [] }) => new Promise((resolve, reject) => {
+const fetcher = (
+  page,
+  sort = {},
+  filter = { categories: [], priceConditions: [] },
+) => new Promise((resolve) => {
   const { by: sortBy = 'name', direction: sortDirection = 'asc' } = sort;
   const { categories: filteredCategories, priceConditions } = filter;
 
@@ -27,8 +31,10 @@ const fetcher = (page, sort = {}, filter = { categories: [], priceConditions: []
         return true;
       }
       return !!priceConditions.find((condition) => {
+        // eslint-disable-next-line
         const x = price;
         // TODO: remove EVAL
+        // eslint-disable-next-line no-eval
         return eval(condition);
       });
     })
@@ -179,6 +185,7 @@ function Storefront({
             <ul className={cssStyles.productFilter}>
               {categories.map((category) => (
                 <li key={category} className={cssStyles.productFilter__item}>
+                  {/* eslint-disable-next-line jsx-a11y/label-has-associated-control */}
                   <label className={cssStyles.filterLabel}>
                     <Checkbox className={cssStyles.filterCheckbox} name={category} onChange={filterCategoryHandler} />
                     {category}
@@ -194,8 +201,13 @@ function Storefront({
             <ul className={cssStyles.productFilter}>
               {prices.map((price) => (
                 <li key={price} className={cssStyles.productFilter__item}>
+                  {/* eslint-disable-next-line jsx-a11y/label-has-associated-control */}
                   <label className={cssStyles.filterLabel}>
-                    <Checkbox className={cssStyles.filterCheckbox} name={price.condition} onChange={filterPriceHandler} />
+                    <Checkbox
+                      className={cssStyles.filterCheckbox}
+                      name={price.condition}
+                      onChange={filterPriceHandler}
+                    />
                     {price.description}
                   </label>
                 </li>

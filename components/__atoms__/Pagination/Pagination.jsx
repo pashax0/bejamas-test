@@ -8,6 +8,7 @@ export default function Pagination({
   className, countOfProducts, productsPerPage = 6, currentPage, onPageClick,
 }) {
   const countOfPages = Math.ceil(countOfProducts / productsPerPage);
+  // eslint-disable-next-line prefer-spread
   const pages = Array.apply(null, Array(countOfPages)).map((x, i) => i + 1);
   const FIRS_PAGE_NUMBER = 1;
 
@@ -30,6 +31,7 @@ export default function Pagination({
         {pages.map((page) => (
           <li key={page}>
             <button
+              type="button"
               className={classNames(
                 cssStyles.navigationButton,
                 currentPage === page && cssStyles.navigationButton_active,
