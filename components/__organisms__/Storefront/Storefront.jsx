@@ -5,14 +5,13 @@ import dynamic from 'next/dynamic';
 import Products from '../../__molecules__/Products';
 import Pagination from '../../__atoms__/Pagination';
 import Filter from '../../__molecules__/Filter';
-import { BottomArrowIcon } from '../../__icons__/BotttomArrowIcon';
-import { TopArrowIcon } from '../../__icons__/TopArrowIcon';
 
 import useWindowSize from '../../../hooks/useWindowSize';
 import { getProducts } from '../../../api/data/products';
 
 import cssStyles from './x0.module.css';
 
+const Sorter = dynamic(() => import('../../__atoms__/Sorter'));
 const FilterButton = dynamic(() => import('../../__atoms__/FilterButton'));
 
 function Storefront({
@@ -34,8 +33,6 @@ function Storefront({
 
   const showDesktopFilter = screenWidth > MOBILE_FILTER_BREAKPOINT;
 
-  const { by: sortBy, direction: sortingDirection } = productParameters.sort;
-
   // eslint-disable-next-line react-hooks/exhaustive-deps
   useEffect(async () => {
     const data = await getProducts({
@@ -55,20 +52,10 @@ function Storefront({
     }));
   };
 
-  const sortingDirectionHandler = () => {
+  const sortChangeHandler = (newSort) => {
     updateProductParameters((prevParameters) => ({
       ...prevParameters,
-      sort: { ...prevParameters.sort, direction: prevParameters.sort.direction === 'asc' ? 'desc' : 'asc' },
-      currentPage: 1,
-    }));
-  };
-
-  const sortingTypeHandler = (event) => {
-    const type = event.target.value;
-
-    updateProductParameters((prevParameters) => ({
-      ...prevParameters,
-      sort: { ...prevParameters.sort, by: type },
+      sort: newSort,
       currentPage: 1,
     }));
   };
@@ -101,20 +88,7 @@ function Storefront({
           <span className={cssStyles.header__subcategory}>Premium Photos</span>
         </h2>
         {showDesktopFilter ? (
-          <div>
-            <button
-              type="button"
-              className={cssStyles.sortDirectionButton}
-              onClick={sortingDirectionHandler}
-            >
-              {sortingDirection === 'asc' ? <BottomArrowIcon /> : <TopArrowIcon />}
-              <span className={cssStyles.sortDirectionButton__text}>Sort By</span>
-            </button>
-            <select className={cssStyles.sortTypeSelect} defaultValue={sortBy} onChange={sortingTypeHandler}>
-              <option value="price">price</option>
-              <option value="name">alphabet</option>
-            </select>
-          </div>
+          <Sorter onSortChange={sortChangeHandler} />
         ) : (
           <FilterButton onClick={toggleMobileFilter} />
         )}
