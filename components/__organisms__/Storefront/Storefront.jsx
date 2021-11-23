@@ -1,25 +1,23 @@
 import { useEffect, useState } from 'react';
-// import dynamic from 'next/dynamic';
 import classNames from 'classnames';
+import dynamic from 'next/dynamic';
 
-import useWindowSize from '../../../hooks/useWindowSize';
 import Products from '../../__molecules__/Products';
 import Pagination from '../../__atoms__/Pagination';
 import Filter from '../../__molecules__/Filter';
-import { BotttomArrowIcon } from '../../__icons__/BotttomArrowIcon';
+import { BottomArrowIcon } from '../../__icons__/BotttomArrowIcon';
 import { TopArrowIcon } from '../../__icons__/TopArrowIcon';
-import { FilterIcon } from '../../__icons__/FilterIcon';
 
+import useWindowSize from '../../../hooks/useWindowSize';
 import { getProducts } from '../../../api/data/products';
 
 import cssStyles from './x0.module.css';
 
-// const Modal = dynamic(() => import('../../__molecules__/Modal'), { ssr: false });
+const FilterButton = dynamic(() => import('../../__atoms__/FilterButton'));
 
 function Storefront({
   className,
 }) {
-  // const [isModalOpened, openModal] = useState(false);
   const defaultProductParameters = {
     filter: undefined,
     sort: { by: 'name', direction: 'asc' },
@@ -97,7 +95,7 @@ function Storefront({
   return (
     <div className={classNames(cssStyles.storefront, className)}>
       <header className={classNames(cssStyles.storefront__header)}>
-        <h2 className={cssStyles.header}>
+        <h2>
           <span>Photography</span>
           <span> / </span>
           <span className={cssStyles.header__subcategory}>Premium Photos</span>
@@ -109,7 +107,7 @@ function Storefront({
               className={cssStyles.sortDirectionButton}
               onClick={sortingDirectionHandler}
             >
-              {sortingDirection === 'asc' ? <BotttomArrowIcon /> : <TopArrowIcon />}
+              {sortingDirection === 'asc' ? <BottomArrowIcon /> : <TopArrowIcon />}
               <span className={cssStyles.sortDirectionButton__text}>Sort By</span>
             </button>
             <select className={cssStyles.sortTypeSelect} defaultValue={sortBy} onChange={sortingTypeHandler}>
@@ -118,14 +116,7 @@ function Storefront({
             </select>
           </div>
         ) : (
-          <button
-            type="button"
-            aria-label="open filters"
-            className={cssStyles.filterButton}
-            onClick={toggleMobileFilter}
-          >
-            <FilterIcon />
-          </button>
+          <FilterButton onClick={toggleMobileFilter} />
         )}
       </header>
       <div className={classNames(cssStyles.storefront__main)}>
@@ -137,17 +128,6 @@ function Storefront({
           )}
           onFilterChange={filterChangeHandler}
         />
-        {/* {true ? ( */}
-        {/*  renderFilters() */}
-        {/* ) : ( */}
-        {/*  isModalOpened && ( */}
-        {/*  <Modal onModalClose={() => { openModal(false); }}> */}
-        {/*    <div> */}
-        {/*      {renderFilters()} */}
-        {/*    </div> */}
-        {/*  </Modal> */}
-        {/*  ) */}
-        {/* )} */}
         <div className={classNames(cssStyles.storefront__products, cssStyles.products)}>
           {products ? (
             renderProducts(products)

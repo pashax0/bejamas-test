@@ -38,10 +38,6 @@
     flex: 1 1 350px;
 }
 
-.header {
-
-}
-
 .sortDirectionButton {
     margin: 0;
     border: none;
@@ -60,12 +56,6 @@
     font-size: 22px;
     line-height: 24px;
     background: none;
-}
-
-.filterButton {
-    composes: button from '../../../styles/components.css';
-
-    display: block;
 }
 
 .header__subcategory {
