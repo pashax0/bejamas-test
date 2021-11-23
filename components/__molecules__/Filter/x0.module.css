@@ -1,0 +1,38 @@
+.filters {
+    display: flex;
+    flex-direction: column;
+    gap: 30px;
+}
+
+.filter {
+    border-bottom: var(--border-block_thin);
+}
+
+.filter:last-child {
+    border-bottom: none;
+}
+
+.filterHeader {
+    margin-bottom: 43px;
+}
+
+.productFilter {
+    margin: 0;
+    padding: 0;
+    font-size: 22px;
+    line-height: 24px;
+}
+
+.productFilter__item {
+    margin: 40px 0;
+    list-style: none;
+}
+
+.filterLabel {
+    display: flex;
+    align-items: center;
+}
+
+.filterCheckbox {
+    margin: 0 23px 0 0;
+}

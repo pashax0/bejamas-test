@@ -1,12 +1,13 @@
 import { useEffect, useState } from 'react';
 import classNames from 'classnames';
 
-import cssStyles from '../../__organisms__/Storefront/x0.module.css';
 import { categories, priceBreakpoints } from '../../../data/seed';
 import Checkbox from '../../__atoms__/Checkbox';
 import { adoptPrices } from '../../../api/adapters/prices';
 
-export default function Filter({ onFilterChange }) {
+import cssStyles from './x0.module.css';
+
+export default function Filter({ className, onFilterChange }) {
   const initialFilter = {
     categories: [],
     priceConditions: [],
@@ -16,6 +17,7 @@ export default function Filter({ onFilterChange }) {
 
   useEffect(() => {
     onFilterChange(filter);
+    // eslint-disable-next-line
   }, [filter]);
 
   const prices = adoptPrices(priceBreakpoints);
@@ -57,7 +59,7 @@ export default function Filter({ onFilterChange }) {
   };
 
   return (
-    <div className={classNames(cssStyles.storefront__filters, cssStyles.filters)}>
+    <div className={classNames(cssStyles.filters, className)}>
       <div className={cssStyles.filter}>
         <h3 className={cssStyles.filterHeader}>Category</h3>
         <ul className={cssStyles.productFilter}>

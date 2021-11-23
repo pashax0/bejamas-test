@@ -69,6 +69,8 @@ function Storefront({
     sort: { by: 'name', direction: 'asc' },
     currentPage: 1,
   };
+
+  const [showFilter, toggleFilterShowing] = useState(false);
   const [productParameters, updateProductParameters] = useState(defaultProductParameters);
   const [products, updateProducts] = useState(null);
   const [productsCount, updateProductsCount] = useState(null);
@@ -131,9 +133,9 @@ function Storefront({
     )
   );
 
-  // const openFiltersClickHandler = () => {
-  //   openModal(true);
-  // };
+  const toggleMobileFilter = () => {
+    toggleFilterShowing(!showFilter);
+  };
 
   return (
     <div className={classNames(cssStyles.storefront, className)}>
@@ -163,14 +165,21 @@ function Storefront({
             type="button"
             aria-label="open filters"
             className={cssStyles.filterButton}
-            // onClick={openFiltersClickHandler}
+            onClick={toggleMobileFilter}
           >
             <FilterIcon />
           </button>
         )}
       </header>
       <div className={classNames(cssStyles.storefront__main)}>
-        <Filter onFilterChange={filterChangeHandler} />
+        <Filter
+          className={classNames(
+            cssStyles.storefront__filter,
+            !showDesktopFilter && cssStyles.storefront__filter_mobile,
+            showDesktopFilter || showFilter ? cssStyles.storefront__filter_show : cssStyles.storefront__filter_hide,
+          )}
+          onFilterChange={filterChangeHandler}
+        />
         {/* {true ? ( */}
         {/*  renderFilters() */}
         {/* ) : ( */}
