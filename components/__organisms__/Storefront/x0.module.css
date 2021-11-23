@@ -11,7 +11,7 @@
 .storefront__main {
     display: flex;
     flex-wrap: wrap;
-    gap: 50px;
+    gap: 8px;
 }
 
 .storefront__filters {
@@ -88,6 +88,12 @@
 
 .filterCheckbox {
     margin: 0 23px 0 0;
+}
+
+.filterButton {
+    composes: button from '../../../styles/components.css';
+
+    display: block;
 }
 
 .products {

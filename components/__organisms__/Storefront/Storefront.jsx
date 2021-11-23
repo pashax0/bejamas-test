@@ -1,7 +1,9 @@
 import { useEffect, useState } from 'react';
 import { useRouter } from 'next/router';
+import dynamic from 'next/dynamic';
 import classNames from 'classnames';
 
+import useWindowSize from '../../../hooks/useWindowSize';
 import { dummyProducts, categories, priceBreakpoints } from '../../../data/seed';
 import { adoptPrices } from '../../../api/adapters/prices';
 import Products from '../../__molecules__/Products';
@@ -9,8 +11,11 @@ import Checkbox from '../../__atoms__/Checkbox';
 import Pagination from '../../__atoms__/Pagination';
 import { BotttomArrowIcon } from './BotttomArrowIcon';
 import { TopArrowIcon } from './TopArrowIcon';
+import { FilterIcon } from '../../__icons__/FilterIcon';
 
 import cssStyles from './x0.module.css';
+
+const Modal = dynamic(() => import('../../__molecules__/Modal'), { ssr: false });
 
 const fetcher = (
   page,
@@ -69,11 +74,17 @@ function Storefront({
 
   const prices = adoptPrices(priceBreakpoints);
 
+  const [isModalOpened, openModal] = useState(false);
   const [currentPage, updateCurrentPage] = useState(1);
   const [filter, updateFilter] = useState(initialFilter);
   const [products, updateProducts] = useState(null);
   const [productsCount, updateProductsCount] = useState(null);
   const [sort, updateSorting] = useState({ by: 'name', direction: 'asc' });
+
+  const MOBILE_FILTER_BREAKPOINT = 768;
+  const { width: screenWidth } = useWindowSize();
+
+  const showDesktopFilter = screenWidth > MOBILE_FILTER_BREAKPOINT;
 
   const { by: sortBy, direction: sortingDirection } = sort;
 
@@ -155,6 +166,51 @@ function Storefront({
     )
   );
 
+  const renderFilters = () => (
+    <div className={classNames(cssStyles.storefront__filters, cssStyles.filters)}>
+      <div className={cssStyles.filter}>
+        <h3 className={cssStyles.filterHeader}>Category</h3>
+        <ul className={cssStyles.productFilter}>
+          {categories.map((category, i) => (
+            // eslint-disable-next-line react/no-array-index-key
+            <li key={i} className={cssStyles.productFilter__item}>
+              {/* eslint-disable-next-line jsx-a11y/label-has-associated-control */}
+              <label className={cssStyles.filterLabel}>
+                <Checkbox className={cssStyles.filterCheckbox} name={category} onChange={filterCategoryHandler} />
+                {category}
+              </label>
+            </li>
+          ))}
+        </ul>
+      </div>
+      <div className={cssStyles.filter}>
+        <h3 className={cssStyles.filterHeader}>
+          Price range
+        </h3>
+        <ul className={cssStyles.productFilter}>
+          {prices.map((price, i) => (
+            // eslint-disable-next-line react/no-array-index-key
+            <li key={i} className={cssStyles.productFilter__item}>
+              {/* eslint-disable-next-line jsx-a11y/label-has-associated-control */}
+              <label className={cssStyles.filterLabel}>
+                <Checkbox
+                  className={cssStyles.filterCheckbox}
+                  name={price.condition}
+                  onChange={filterPriceHandler}
+                />
+                {price.description}
+              </label>
+            </li>
+          ))}
+        </ul>
+      </div>
+    </div>
+  );
+
+  const openFiltersClickHandler = () => {
+    openModal(true);
+  };
+
   return (
     <div className={classNames(cssStyles.storefront, className)}>
       <header className={classNames(cssStyles.storefront__header)}>
@@ -163,60 +219,44 @@ function Storefront({
           <span> / </span>
           <span className={cssStyles.header__subcategory}>Premium Photos</span>
         </h2>
-        <div>
+        {showDesktopFilter ? (
+          <div>
+            <button
+              type="button"
+              className={cssStyles.sortDirectionButton}
+              onClick={sortingDirectionHandler}
+            >
+              {sortingDirection === 'asc' ? <BotttomArrowIcon /> : <TopArrowIcon />}
+              <span className={cssStyles.sortDirectionButton__text}>Sort By</span>
+            </button>
+            <select className={cssStyles.sortTypeSelect} defaultValue={sortBy} onChange={sortingTypeHandler}>
+              <option value="price">price</option>
+              <option value="name">alphabet</option>
+            </select>
+          </div>
+        ) : (
           <button
             type="button"
-            className={cssStyles.sortDirectionButton}
-            onClick={sortingDirectionHandler}
+            aria-label="open filters"
+            className={cssStyles.filterButton}
+            onClick={openFiltersClickHandler}
           >
-            {sortingDirection === 'asc' ? <BotttomArrowIcon /> : <TopArrowIcon />}
-            <span className={cssStyles.sortDirectionButton__text}>Sort By</span>
+            <FilterIcon />
           </button>
-          <select className={cssStyles.sortTypeSelect} defaultValue={sortBy} onChange={sortingTypeHandler}>
-            <option value="price">price</option>
-            <option value="name">alphabet</option>
-          </select>
-        </div>
+        )}
       </header>
       <div className={classNames(cssStyles.storefront__main)}>
-        <div className={classNames(cssStyles.storefront__filters, cssStyles.filters)}>
-          <div className={cssStyles.filter}>
-            <h3 className={cssStyles.filterHeader}>Category</h3>
-            <ul className={cssStyles.productFilter}>
-              {categories.map((category, i) => (
-                  // eslint-disable-next-line react/no-array-index-key
-                <li key={i} className={cssStyles.productFilter__item}>
-                  {/* eslint-disable-next-line jsx-a11y/label-has-associated-control */}
-                  <label className={cssStyles.filterLabel}>
-                    <Checkbox className={cssStyles.filterCheckbox} name={category} onChange={filterCategoryHandler} />
-                    {category}
-                  </label>
-                </li>
-              ))}
-            </ul>
-          </div>
-          <div className={cssStyles.filter}>
-            <h3 className={cssStyles.filterHeader}>
-              Price range
-            </h3>
-            <ul className={cssStyles.productFilter}>
-              {prices.map((price, i) => (
-                  // eslint-disable-next-line react/no-array-index-key
-                <li key={i} className={cssStyles.productFilter__item}>
-                  {/* eslint-disable-next-line jsx-a11y/label-has-associated-control */}
-                  <label className={cssStyles.filterLabel}>
-                    <Checkbox
-                      className={cssStyles.filterCheckbox}
-                      name={price.condition}
-                      onChange={filterPriceHandler}
-                    />
-                    {price.description}
-                  </label>
-                </li>
-              ))}
-            </ul>
-          </div>
-        </div>
+        {showDesktopFilter ? (
+          renderFilters()
+        ) : (
+          isModalOpened && (
+          <Modal onModalClose={() => { openModal(false); }}>
+            <div>
+              {renderFilters()}
+            </div>
+          </Modal>
+          )
+        )}
         <div className={classNames(cssStyles.storefront__products, cssStyles.products)}>
           {products ? (
             renderProducts(products)
