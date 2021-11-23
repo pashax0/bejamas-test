@@ -1,7 +1,7 @@
 import classNames from 'classnames';
 import { useDispatch } from 'react-redux';
 
-import { addToBasket } from '../../../redux/actions';
+import { addToBasket } from '../../../state/actions';
 import { roundCurrency, currencySign } from '../../../api/adapters/prices';
 
 import cssStyles from './x0.module.css';

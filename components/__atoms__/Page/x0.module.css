@@ -1,0 +1,15 @@
+.page {
+    padding: 0 68px 0 82px;
+    display: flex;
+    justify-content: center;
+}
+
+.page__content {
+    max-width: 1440px;
+}
+
+@media (max-width: 768px) {
+    .page {
+        padding: 0 14px;
+    }
+}

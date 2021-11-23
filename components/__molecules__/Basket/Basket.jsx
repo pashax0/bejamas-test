@@ -3,7 +3,7 @@ import dynamic from 'next/dynamic';
 import classNames from 'classnames';
 
 import { Basket as BasketIcon } from '../../__icons__/Basket';
-import { clearBasket, closeBasket, openBasket } from '../../../redux/actions';
+import { clearBasket, closeBasket, openBasket } from '../../../state/actions';
 
 import cssStyles from './x0.module.css';
 import { Cross } from '../../__icons__/Cross';

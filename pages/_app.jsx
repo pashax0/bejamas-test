@@ -2,7 +2,7 @@ import { Provider } from 'react-redux';
 
 import '../styles/globals.css';
 
-import store from '../redux/store';
+import store from '../state/store';
 
 function MyApp({ Component, pageProps }) {
   return (

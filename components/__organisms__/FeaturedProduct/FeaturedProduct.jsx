@@ -2,7 +2,7 @@ import classNames from 'classnames';
 import { useDispatch } from 'react-redux';
 import cssStyles from './x0.module.css';
 
-import { addToBasket } from '../../../redux/actions';
+import { addToBasket } from '../../../state/actions';
 
 function FeaturedProduct({
   className, product,
