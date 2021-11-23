@@ -1,7 +1,7 @@
 // import type { NextPage } from 'next'
 import Head from 'next/head';
 
-import { dummyProducts } from '../data/seed';
+import { dummyProducts } from '../api/data/seed';
 
 import PageHeader from '../components/__organisms__/PageHeader';
 import Storefront from '../components/__organisms__/Storefront';

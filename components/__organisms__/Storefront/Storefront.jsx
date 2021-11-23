@@ -3,62 +3,18 @@ import { useEffect, useState } from 'react';
 import classNames from 'classnames';
 
 import useWindowSize from '../../../hooks/useWindowSize';
-import { dummyProducts } from '../../../data/seed';
 import Products from '../../__molecules__/Products';
 import Pagination from '../../__atoms__/Pagination';
 import Filter from '../../__molecules__/Filter';
-import { BotttomArrowIcon } from './BotttomArrowIcon';
-import { TopArrowIcon } from './TopArrowIcon';
+import { BotttomArrowIcon } from '../../__icons__/BotttomArrowIcon';
+import { TopArrowIcon } from '../../__icons__/TopArrowIcon';
 import { FilterIcon } from '../../__icons__/FilterIcon';
+
+import { getProducts } from '../../../api/data/products';
 
 import cssStyles from './x0.module.css';
 
 // const Modal = dynamic(() => import('../../__molecules__/Modal'), { ssr: false });
-
-const fetcher = (
-  page,
-  sort = {},
-  filter = { categories: [], priceConditions: [] },
-) => new Promise((resolve) => {
-  const { by: sortBy = 'name', direction: sortDirection = 'asc' } = sort;
-  const { categories: filteredCategories, priceConditions } = filter;
-
-  const filteredByCategoriesProducts = filteredCategories.length > 0
-    ? dummyProducts.filter((product) => filteredCategories.includes(product.category))
-    : dummyProducts;
-
-  const filteredProducts = priceConditions.length > 0
-    ? filteredByCategoriesProducts.filter((product) => {
-      const { price } = product;
-      if (!price) {
-        return true;
-      }
-      return !!priceConditions.find((condition) => {
-        // eslint-disable-next-line
-        const x = price;
-        // TODO: remove EVAL
-        // eslint-disable-next-line no-eval
-        return eval(condition);
-      });
-    })
-    : filteredByCategoriesProducts;
-
-  const sortedProducts = filteredProducts.sort((a, b) => {
-    if (a[sortBy] > b[sortBy]) {
-      return sortDirection === 'asc' ? 1 : -1;
-    }
-    if (a[sortBy] < b[sortBy]) {
-      return sortDirection === 'asc' ? -1 : 1;
-    }
-    return 0;
-  });
-
-  const products = sortedProducts.slice((page * 6) - 6, page * 6);
-
-  setTimeout(() => {
-    resolve({ products, count: sortedProducts.length });
-  }, 1000);
-});
 
 function Storefront({
   className,
@@ -82,14 +38,15 @@ function Storefront({
 
   const { by: sortBy, direction: sortingDirection } = productParameters.sort;
 
-  useEffect(() => {
-    async function fetchProducts() {
-      const data = await fetcher(productParameters.currentPage, productParameters.sort, productParameters.filter);
-      updateProducts(data.products);
-      updateProductsCount(data.count);
-    }
-
-    fetchProducts();
+  // eslint-disable-next-line react-hooks/exhaustive-deps
+  useEffect(async () => {
+    const data = await getProducts({
+      page: productParameters.currentPage,
+      sort: productParameters.sort,
+      filter: productParameters.filter,
+    });
+    updateProducts(data.products);
+    updateProductsCount(data.count);
   }, [productParameters]);
 
   const filterChangeHandler = (newFilter) => {

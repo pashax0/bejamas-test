@@ -1,4 +1,4 @@
-import { useState, useEffect } from 'react';
+// import { useState, useEffect } from 'react';
 import { createPortal } from 'react-dom';
 import classNames from 'classnames';
 
@@ -6,9 +6,8 @@ import cssStyles from './x0.module.css';
 
 const appRoot = document.getElementById('__next');
 
-/* Need to import only dynamicly and with ssr: false */
 export default function Modal({
-  children, className, isOpen, onModalClose,
+  children, className, onModalClose,
 }) {
   // useEffect(() => {
   //   if (isOpen) {
@@ -34,7 +33,13 @@ export default function Modal({
       onClick={closeModalHandler}
       aria-hidden
     >
-      <button onClick={onModalClose}>X</button>
+      <button
+        type="button"
+        aria-label="close modal"
+        onClick={onModalClose}
+      >
+        X
+      </button>
       {children}
     </div>,
     appRoot,

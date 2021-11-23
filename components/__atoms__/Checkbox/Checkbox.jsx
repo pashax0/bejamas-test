@@ -1,7 +1,7 @@
 import { useState } from 'react';
 import classNames from 'classnames';
 
-import { CheckIcon } from './CheckIcon';
+import { CheckIcon } from '../../__icons__/CheckIcon';
 import cssStyles from './x0.module.css';
 
 export default function Checkbox({ className, name, onChange }) {

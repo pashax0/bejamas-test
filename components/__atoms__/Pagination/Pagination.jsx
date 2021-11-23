@@ -1,8 +1,8 @@
 import classNames from 'classnames';
 
 import cssStyles from './x0.module.css';
-import { NextIcon } from './NextIcon';
-import { PreviousIcon } from './PreviousIcon';
+import { NextIcon } from '../../__icons__/NextIcon';
+import { PreviousIcon } from '../../__icons__/PreviousIcon';
 
 export default function Pagination({
   className, countOfProducts, productsPerPage = 6, currentPage, onPageClick,

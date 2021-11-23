@@ -1,7 +1,7 @@
 import { useEffect, useState } from 'react';
 import classNames from 'classnames';
 
-import { categories, priceBreakpoints } from '../../../data/seed';
+import { categories, priceBreakpoints } from '../../../api/data/seed';
 import Checkbox from '../../__atoms__/Checkbox';
 import { adoptPrices } from '../../../api/adapters/prices';
 
