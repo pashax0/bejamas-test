@@ -1,6 +1,6 @@
 .productList {
-    margin: 0;
-    padding: 0;
+    composes: list from '../../../styles/components.css';
+
     display: flex;
     justify-content: center;
     flex-wrap: wrap;
@@ -9,5 +9,4 @@
 
 .productList__item {
     flex: 0 1 282px;
-    list-style: none;
 }
