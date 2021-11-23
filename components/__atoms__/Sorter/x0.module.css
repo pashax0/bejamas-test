@@ -1,0 +1,26 @@
+.sorter {
+    display: flex;
+    align-items: center;
+    gap: 15px;
+}
+
+.sortDirectionButton {
+    composes: button from '../../../styles/components.css';
+
+    display: flex;
+    align-items: center;
+    font-size: 22px;
+    line-height: 24px;
+    color: var(--color-grey);
+}
+
+.sortDirectionButton__text {
+    margin-left: 7px;
+}
+
+.sortTypeSelect {
+    border: none;
+    font-size: 22px;
+    line-height: 24px;
+    background: none;
+}

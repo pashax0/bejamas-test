@@ -1,0 +1,38 @@
+.pagination {
+    margin: 61px 0;
+    display: flex;
+    justify-content: center;
+    gap: 21px
+}
+
+.navigationButton {
+    composes: button from '../../../styles/components.css';
+
+    font-size: inherit;
+    cursor: pointer;
+}
+
+.navigationButton_active {
+    font-weight: 700;
+}
+
+.navigationButton svg {
+    display: block;
+}
+
+.navigationButton_hidden {
+    visibility: hidden;
+}
+
+.navigationButton_visible {
+    visibility: visible;
+}
+
+.paginationList {
+    composes: list from '../../../styles/components.css';
+
+    display: flex;
+    gap: 15px;
+    font-size: 29px;
+    line-height: 32px;
+}

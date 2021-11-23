@@ -1,0 +1,5 @@
+.filterButton {
+    composes: button from '../../../styles/components.css';
+
+    display: block;
+}

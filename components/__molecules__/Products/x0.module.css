@@ -1,0 +1,12 @@
+.productList {
+    composes: list from '../../../styles/components.css';
+
+    display: flex;
+    justify-content: center;
+    flex-wrap: wrap;
+    gap: 50px;
+}
+
+.productList__item {
+    flex: 0 1 282px;
+}
